@@ -4682,6 +4682,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"expo-blur@npm:~13.0.2":
+  version: 13.0.2
+  resolution: "expo-blur@npm:13.0.2"
+  peerDependencies:
+    expo: "*"
+  checksum: 66badeee2002a6aed63b7e122bcd9efa514bf954a28844649a1312d3dca2c37f96cf075938850be7e56904c884c5165ae9606d553458cf8a6a9cf26f148be2b4
+  languageName: node
+  linkType: hard
+
 "expo-constants@npm:~16.0.0, expo-constants@npm:~16.0.2":
   version: 16.0.2
   resolution: "expo-constants@npm:16.0.2"
@@ -8382,6 +8391,7 @@ __metadata:
     eslint-plugin-react: ^7.34.1
     eslint-plugin-react-hooks: ^4.6.0
     expo: ~51.0.24
+    expo-blur: ~13.0.2
     expo-constants: ~16.0.2
     expo-dev-client: ~4.0.21
     expo-linking: ~6.3.1
