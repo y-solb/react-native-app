@@ -1,8 +1,25 @@
-import { Stack } from 'expo-router'
+import { useLogTrackPlayerState } from '@/hooks/useLogTrackPlayerState'
+import { useSetupTrackPlayer } from '@/hooks/useSetupTrackPlayer'
+import { SplashScreen, Stack } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
+import { useCallback } from 'react'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 
+// 앱이 준비될 때까지 스플래시 스크린을 표시
+SplashScreen.preventAutoHideAsync()
+
 const App = () => {
+	const handleTrackPlayerLoaded = useCallback(() => {
+		// 스플래시 스크린을 숨김
+		SplashScreen.hideAsync()
+	}, [])
+
+	useSetupTrackPlayer({
+		onLoad: handleTrackPlayerLoaded,
+	})
+
+	useLogTrackPlayerState()
+
 	return (
 		<SafeAreaProvider>
 			<RootNavigation />

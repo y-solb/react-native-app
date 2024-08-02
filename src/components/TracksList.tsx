@@ -1,9 +1,10 @@
 import { FlatList, FlatListProps, View } from 'react-native'
 import { TracksListItem } from './TracksListItem'
 import { utilsStyles } from '@/styles'
+import { Track } from 'react-native-track-player'
 
-export type TracksListProps = Partial<FlatListProps<unknown>> & {
-	tracks: any[]
+export type TracksListProps = Partial<FlatListProps<Track>> & {
+	tracks: Track[]
 }
 
 const ItemDivider = () => (
@@ -11,6 +12,10 @@ const ItemDivider = () => (
 )
 
 export const TracksList = ({ tracks, ...flatlistProps }: TracksListProps) => {
+	const handleTrackSelect = (track: Track) => {
+		console.log(track)
+	}
+
 	return (
 		<FlatList
 			data={tracks}
@@ -20,7 +25,10 @@ export const TracksList = ({ tracks, ...flatlistProps }: TracksListProps) => {
 			// 각 항목 사이에 구분선을 추가
 			ItemSeparatorComponent={ItemDivider}
 			renderItem={({ item: track }) => (
-				<TracksListItem track={{ ...track, image: track.artwork }} />
+				<TracksListItem
+					track={{ ...track, image: track.artwork }}
+					onTrackSelect={handleTrackSelect}
+				/>
 			)}
 			{...flatlistProps}
 		/>
