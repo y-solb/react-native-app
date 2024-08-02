@@ -8401,6 +8401,7 @@ __metadata:
     react: 18.2.0
     react-native: 0.74.3
     react-native-fast-image: ^8.6.3
+    react-native-loader-kit: ^2.0.8
     react-native-safe-area-context: 4.10.5
     react-native-screens: 3.31.1
     react-native-track-player: ^4.1.1
@@ -8428,6 +8429,16 @@ __metadata:
   peerDependencies:
     react: ^16.6.0 || ^17.0.0 || ^18.0.0
   checksum: 5487f4eb9d3a0b6747d258d4371667384d0f2722be11ac41c7bb9777d25fb098c702ab94fb010223e2093e417a0d334c9314df40e3b3038290de58c62154000d
+  languageName: node
+  linkType: hard
+
+"react-native-loader-kit@npm:^2.0.8":
+  version: 2.0.8
+  resolution: "react-native-loader-kit@npm:2.0.8"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 98af152be0c6b9990a03b415437e2c0969ebdfdd564be6fddfd4090093cfc93d7a79d479ab376d83f3cb4912a950bdb171fd9540a5c14121a1629b4052d3ff1a
   languageName: node
   linkType: hard
 
