@@ -3,8 +3,9 @@ import { colors, fontSize } from '@/constants/tokens'
 import { defaultStyles } from '@/styles'
 import { StyleSheet, TouchableHighlight, View, Text } from 'react-native'
 import FastImage from 'react-native-fast-image' // 이미지를 빠르게 로드하고 표시
-import { Track, useActiveTrack } from 'react-native-track-player'
-import { Entypo } from '@expo/vector-icons'
+import { Track, useActiveTrack, useIsPlaying } from 'react-native-track-player'
+import { Entypo, Ionicons } from '@expo/vector-icons'
+import LoaderKit from 'react-native-loader-kit'
 
 export type TracksListItemProps = {
 	track: Track
@@ -15,7 +16,9 @@ export const TracksListItem = ({
 	track,
 	onTrackSelect: handleTrackSelect,
 }: TracksListItemProps) => {
+	const { playing } = useIsPlaying()
 	const isActiveTrack = useActiveTrack()?.url === track.url
+
 	return (
 		// 터치 가능한 영역
 		<TouchableHighlight onPress={() => handleTrackSelect(track)}>
@@ -31,6 +34,21 @@ export const TracksListItem = ({
 							opacity: isActiveTrack ? 0.6 : 1,
 						}}
 					/>
+					{isActiveTrack &&
+						(playing ? (
+							<LoaderKit
+								style={styles.trackPlayingIconIndicator}
+								name="LineScaleParty"
+								color={colors.icon}
+							/>
+						) : (
+							<Ionicons
+								style={styles.trackPausedIndicator}
+								name="play"
+								size={24}
+								color={colors.icon}
+							/>
+						))}
 				</View>
 				<View
 					style={{

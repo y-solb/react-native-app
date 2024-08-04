@@ -1,7 +1,9 @@
-import { FlatList, FlatListProps, View } from 'react-native'
+import { FlatList, FlatListProps, View, Text } from 'react-native'
 import { TracksListItem } from './TracksListItem'
 import { utilsStyles } from '@/styles'
-import { Track } from 'react-native-track-player'
+import TrackPlayer, { Track } from 'react-native-track-player'
+import FastImage from 'react-native-fast-image'
+import { unknownTrackImageUri } from '@/constants/images'
 
 export type TracksListProps = Partial<FlatListProps<Track>> & {
 	tracks: Track[]
@@ -12,8 +14,9 @@ const ItemDivider = () => (
 )
 
 export const TracksList = ({ tracks, ...flatlistProps }: TracksListProps) => {
-	const handleTrackSelect = (track: Track) => {
-		console.log(track)
+	const handleTrackSelect = async (track: Track) => {
+		await TrackPlayer.load(track)
+		await TrackPlayer.play()
 	}
 
 	return (
@@ -24,6 +27,15 @@ export const TracksList = ({ tracks, ...flatlistProps }: TracksListProps) => {
 			ListFooterComponent={ItemDivider}
 			// 각 항목 사이에 구분선을 추가
 			ItemSeparatorComponent={ItemDivider}
+			ListEmptyComponent={
+				<View>
+					<Text style={utilsStyles.emptyContentText}>No songs found</Text>
+					<FastImage
+						source={{ uri: unknownTrackImageUri, priority: FastImage.priority.normal }}
+						style={utilsStyles.emptyContentImage}
+					/>
+				</View>
+			}
 			renderItem={({ item: track }) => (
 				<TracksListItem
 					track={{ ...track, image: track.artwork }}
