@@ -6,18 +6,24 @@ import { PlayPauseButton, SkipToNextButton } from '@/components/PlayerControls'
 import { defaultStyles } from '@/styles'
 import { useLastActiveTrack } from '@/hooks/useLastActiveTrack'
 import { MovingText } from '@/components/MovingText'
+import { useRouter } from 'expo-router'
 
 export const FloatingPlayer = ({ style }: ViewProps) => {
+	const router = useRouter()
 	const activeTrack = useActiveTrack()
 	const lastActiveTrack = useLastActiveTrack()
 
 	const displayedTrack = activeTrack ?? lastActiveTrack
 
+	const handlePress = () => {
+		router.navigate('/player')
+	}
+
 	if (!displayedTrack) return null
 
 	return (
 		// 터치 시 뷰의 opacity를 낮춰 시각적 피드백을 제공하는 컴포넌트
-		<TouchableOpacity activeOpacity={0.9} style={[styles.container, style]}>
+		<TouchableOpacity activeOpacity={0.9} style={[styles.container, style]} onPress={handlePress}>
 			<>
 				<FastImage
 					source={{
