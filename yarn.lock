@@ -2156,6 +2156,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-native-menu/menu@npm:^1.1.2":
+  version: 1.1.2
+  resolution: "@react-native-menu/menu@npm:1.1.2"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 3c2733f70de25a560b99396d06a70d74a6e47ce165395f333c3ee56b0e71ef71257979a32c61c91669e5e108429bee91986211b3d47dd86f716edb3bc3ca891a
+  languageName: node
+  linkType: hard
+
 "@react-native/assets-registry@npm:0.74.85":
   version: 0.74.85
   resolution: "@react-native/assets-registry@npm:0.74.85"
@@ -8865,6 +8875,7 @@ __metadata:
   resolution: "react-native-app@workspace:."
   dependencies:
     "@babel/core": ^7.20.0
+    "@react-native-menu/menu": ^1.1.2
     "@types/react": ~18.2.45
     "@typescript-eslint/eslint-plugin": ^7.4.0
     "@typescript-eslint/parser": ^7.4.0
