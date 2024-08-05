@@ -4,8 +4,9 @@ import { useNavigationSearch } from '@/hooks/useNavigationSearch'
 import { defaultStyles } from '@/styles'
 import { useMemo } from 'react'
 import { ScrollView, View } from 'react-native'
-import library from '@/assets/data/library.json'
 import { trackTitleFilter } from '@/helpers/filter'
+import { useTracks } from '@/store/library'
+import { generateTracksListId } from '@/helpers/miscellaneous'
 
 const SongsScreen = () => {
 	const search = useNavigationSearch({
@@ -14,11 +15,13 @@ const SongsScreen = () => {
 		},
 	})
 
-	const filteredTracks = useMemo(() => {
-		if (!search) return library
+	const tracks = useTracks()
 
-		return library.filter(trackTitleFilter(search))
-	}, [search])
+	const filteredTracks = useMemo(() => {
+		if (!search) return tracks
+
+		return tracks.filter(trackTitleFilter(search))
+	}, [search, tracks])
 
 	return (
 		<View style={defaultStyles.container}>
@@ -28,6 +31,7 @@ const SongsScreen = () => {
 				style={{ paddingHorizontal: screenPadding.horizontal }}
 			>
 				<TracksList
+					id={generateTracksListId('songs', search)}
 					tracks={filteredTracks}
 					// 자체의 스크롤 기능을 비활성화
 					scrollEnabled={false}

@@ -12,3 +12,12 @@ export const formatSecondsToMinutes = (seconds: number) => {
 
 	return `${formattedMinutes}:${formattedSeconds}`
 }
+/**
+ * 탭 이름과 검색어로 고유한 ID를 생성하는 함수
+ * @param trackListName 탭 이름
+ * @param search 검색어
+ * @returns 탭 이름-검색어
+ */
+export const generateTracksListId = (trackListName: string, search?: string) => {
+	return `${trackListName}${`-${search}` || ''}`
+}
