@@ -6,9 +6,13 @@ import { useCallback } from 'react'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { colors } from '@/constants/tokens'
+import TrackPlayer from 'react-native-track-player'
+import { playbackService } from '@/constants/playbackService'
 
 // 앱이 준비될 때까지 스플래시 스크린을 표시
 SplashScreen.preventAutoHideAsync()
+
+TrackPlayer.registerPlaybackService(() => playbackService)
 
 const App = () => {
 	const handleTrackPlayerLoaded = useCallback(() => {
