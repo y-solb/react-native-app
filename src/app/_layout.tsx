@@ -5,6 +5,7 @@ import { StatusBar } from 'expo-status-bar'
 import { useCallback } from 'react'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
+import { colors } from '@/constants/tokens'
 
 // 앱이 준비될 때까지 스플래시 스크린을 표시
 SplashScreen.preventAutoHideAsync()
@@ -51,6 +52,20 @@ const RootNavigation = () => {
 					gestureDirection: 'vertical',
 					animationDuration: 400,
 					headerShown: false,
+				}}
+			/>
+
+			<Stack.Screen
+				name="(modals)/addToPlaylist"
+				options={{
+					presentation: 'modal',
+					headerStyle: {
+						backgroundColor: colors.background,
+					},
+					headerTitle: 'Add to playlist',
+					headerTitleStyle: {
+						color: colors.text,
+					},
 				}}
 			/>
 		</Stack>
