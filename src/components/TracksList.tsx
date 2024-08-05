@@ -6,17 +6,24 @@ import FastImage from 'react-native-fast-image'
 import { unknownTrackImageUri } from '@/constants/images'
 import { useRef } from 'react'
 import { useQueue } from '@/store/queue'
+import { QueueControls } from './QueueControls'
 
 export type TracksListProps = Partial<FlatListProps<Track>> & {
 	id: string
 	tracks: Track[]
+	hideQueueControls?: boolean
 }
 
 const ItemDivider = () => (
 	<View style={{ ...utilsStyles.itemSeparator, marginVertical: 9, marginLeft: 60 }} />
 )
 
-export const TracksList = ({ id, tracks, ...flatlistProps }: TracksListProps) => {
+export const TracksList = ({
+	id,
+	tracks,
+	hideQueueControls = false,
+	...flatlistProps
+}: TracksListProps) => {
 	const queueOffset = useRef(0)
 	const { activeQueueId, setActiveQueueId } = useQueue()
 
@@ -58,6 +65,10 @@ export const TracksList = ({ id, tracks, ...flatlistProps }: TracksListProps) =>
 			ListFooterComponent={ItemDivider}
 			// 각 항목 사이에 구분선을 추가
 			ItemSeparatorComponent={ItemDivider}
+			// list에 header 추가
+			ListHeaderComponent={
+				!hideQueueControls ? <QueueControls tracks={tracks} style={{ paddingBottom: 20 }} /> : null
+			}
 			ListEmptyComponent={
 				<View>
 					<Text style={utilsStyles.emptyContentText}>No songs found</Text>
