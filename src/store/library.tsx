@@ -1,7 +1,8 @@
 import { create } from 'zustand'
 import library from '@/assets/data/library.json'
-import { TrackWithPlaylist } from '@/helpers/types'
+import { Artist, TrackWithPlaylist } from '@/helpers/types'
 import { Track } from 'react-native-track-player'
+import { P } from 'ts-pattern'
 
 interface LibraryState {
 	tracks: TrackWithPlaylist[]
@@ -26,3 +27,21 @@ export const useFavorites = () => {
 		toggleTrackFavorite,
 	}
 }
+
+export const useArtists = () =>
+	useLibraryStore((state) =>
+		state.tracks.reduce((acc, track) => {
+			const existingArtist = acc.find((item) => item.name === track.artist)
+
+			if (existingArtist) {
+				existingArtist.tracks.push(track)
+			} else {
+				acc.push({
+					name: track.artist ?? 'Unknown',
+					tracks: [track],
+				})
+			}
+
+			return acc
+		}, [] as Artist[]),
+	)
